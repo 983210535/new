@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        .all {
+            width: 400px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            /* display: grid;
+            grid-template-columns: 100px 100px 100px 100px;
+            grid-template-rows: 100px 100px 100px; */
+        }
+        
+        .right {
+            display: flex;
+            flex-direction: column;
+            order: 2;
+        }
+        
+        .bottom {
+            display: flex;
+            flex-direction: row-reverse;
+            order: 1;
+            align-self: flex-end;
+        }
+        
+        .left {
+            display: flex;
+            flex-direction: column-reverse;
+            order: 0;
+        }
+        
+        .bro {
+            width: 100px;
+            height: 100px;
+            border: 1px solid pink;
+            text-align: center;
+            line-height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="javascript:void(0)" id="hehe">顶部</a>
+    <form action="" action="GET">
+        <input type="text" name="name">
+        <input type="text" name="age">
+        <input type="submit">
+    </form>
+
+
+    <div class="all">
+        <div class="bro"></div>
+        <div class="bro"></div>
+        <div class="bro"></div>
+        <div class="bro"></div>
+        <div class="right">
+            <div class="bro"></div>
+            <div class="bro"></div>
+        </div>
+        <div class="bottom">
+            <div class="bro"></div>
+            <div class="bro"></div>
+        </div>
+        <div class="left">
+            <div class="bro"></div>
+            <div class="bro"></div>
+        </div>
+    </div>
+
+    <button>开始</button>
+    <button>暂停</button>
+    <button>重选</button>
+    <a href="#hehe">
+        <div style="width: 100px;height: 100px;background: red;margin-top: 1000px;"></div>
+    </a>
+    <script>
+        var bro = document.getElementsByClassName("bro")
+        var arr = ["郑爽", "杨幂", "宝贝", "乐芙兰", "辛德拉", "金克丝", "巨魔", "罗翔", "易洋", "变态"]
+            // var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        var obj = {
+            name: arr,
+            uni: function() {
+                for (let i = 0; i < this.name.length; i++) {
+                    bro[i].innerHTML = this.name[i]
+                        // console.log(i)
+                }
+            },
+            uni2: function() {
+                var num = Math.floor(Math.random() * 10)
+                    // console.log(num)
+                for (var i = 0; i < bro.length; i++) {
+                    bro[i].style.background = ""
+                }
+                bro[num].style.background = "green"
+            },
+            uni3: function() {
+                for (var i = 0; i < bro.length; i++) {
+                    if (bro[i].style.background == "green") {
+                        bro[i].style.background = ""
+                        if (i == bro.length - 1) {
+                            i = 0
+                            bro[i].style.background = "green"
+                            break
+                        }
+                        bro[i + 1].style.background = "green"
+                        break
+                    }
+                }
+            },
+            uni4: function() {
+                for (var i = 0; i < bro.length; i++) {
+                    if (bro[i].style.background == "green") {
+                        alert("恭喜" + arr[i] + "同学中奖")
+                        break
+                    }
+                }
+            }
+        }
+        obj.uni()
+        obj.uni2()
+        var db
+        document.getElementsByTagName("button")[0].onclick = function() {
+            clearInterval(db)
+            db = setInterval(() => {
+                obj.uni3()
+            }, 100);
+        }
+        document.getElementsByTagName("button")[1].onclick = () => {
+            clearInterval(db)
+            setTimeout(() => {
+                obj.uni4()
+            }, 1000);
+        }
+        document.getElementsByTagName("button")[2].onclick = () => {
+            obj.uni2()
+                // location.reload()
+        }
+    </script>
+    <script>
+        // setTimeout(uni, 3000)
+        var str = location.search
+        if (str != "") {
+            console.log(uni())
+        }
+
+        function uni() {
+            // var str = location.search
+            var newstr0 = str.slice(1)
+            var newstr = newstr0.split("&")
+            var a1 = newstr[0].split("=")
+            var a2 = newstr[1].split("=")
+            var arr = a1.concat(a2)
+            var obj = {}
+            obj[arr[0]] = arr[1]
+            obj[arr[2]] = arr[3]
+            return obj
+        }
+        // uni()
+    </script>
+</body>
+
+</html>
