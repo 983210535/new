@@ -1,4 +1,2 @@
-# new
-giao
- 
-diyici yong GayHub henxingfen
+＃个新
+手动开始手动暂停的抽奖游戏
