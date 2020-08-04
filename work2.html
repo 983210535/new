@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 1600px;
+            height: 800px;
+            border: 1px solid red;
+            margin: 50px auto;
+            position: relative;
+        }
+        
+        div>img {
+            width: 200px;
+            height: 200px;
+            position: absolute;
+        }
+        
+        button {
+            position: fixed;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <img src="img/1.jpg" alt="">
+        <img src="img/2.gif" alt="">
+        <img src="img/3.jpg" alt="">
+        <img src="img/4.jpg" alt="">
+        <img src="img/5.jpg" alt="">
+        <img src="img/6.jpg" alt="">
+        <img src="img/7.jpg" alt="">
+        <img src="img/8.jpg" alt="">
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script>
+        $("img").on("click", function() {
+            if ($(this).css("top") == 0 + "px") return false
+            console.log($(this).css("width"))
+            $(this).css("transform", "initial").animate({
+                "top": 0,
+                "left": 0,
+                "width": 1600,
+                "height": 800,
+            }).siblings().animate({
+                "width": 0
+            }, 1000)
+            if ($("button")[0]) {
+                return false
+            } else {
+                $("div").after("<button onclick='click()'>切换上一步</button>")
+                $("button").on("click", function() {
+                    $("img").each(function(index, ele) {
+                        $(ele).animate({
+                            "left": arr1[index],
+                            "top": arr2[index],
+                            "transform": "rotate(" + arr3[index] + "deg)",
+                            "width": 200,
+                            "height": 200
+                        }, 2000)
+                    })
+                    $(this).remove()
+                })
+            }
+        })
+        var arr1 = []
+        var arr2 = []
+        var arr3 = []
+        $("img").each(function(index, ele) {
+            var left = Math.ceil(Math.random() * 1000)
+            var top = Math.ceil(Math.random() * 500)
+            var zhuan = Math.floor(Math.random() * 60 - 30)
+            arr1.push(left)
+            arr2.push(top)
+            arr3.push(zhuan)
+            $(ele).css({
+                "top": top,
+                "left": left,
+                "transform": "rotate(" + zhuan + "deg)"
+            })
+        })
+    </script>
+</body>
+
+</html>
